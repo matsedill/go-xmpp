@@ -44,6 +44,10 @@ func main() {
 			ServerName:         serverName(*server),
 			InsecureSkipVerify: false,
 		}
+	} else {
+		xmpp.DefaultConfig = tls.Config{
+			InsecureSkipVerify: true,
+		}
 	}
 
 	var talk *xmpp.Client
