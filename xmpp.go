@@ -198,13 +198,13 @@ type Options struct {
 
 // NewClient establishes a new Client connection based on a set of Options.
 func (o Options) NewClient() (*Client, error) {
-	if o.Debug {
-		fmt.Fprintf(os.Stdout, "Hello I am in newclient")
-	}
 	host := o.Host
 	c, err := connect(host, o.User, o.Password)
 	if err != nil {
 		return nil, err
+	}
+	if o.Debug {
+		fmt.Fprintf(os.Stdout, "Hello I am in newclient")
 	}
 
 	if strings.LastIndex(o.Host, ":") > 0 {
@@ -251,6 +251,7 @@ func (o Options) NewClient() (*Client, error) {
 // If host is not specified, the  DNS SRV should be used to find the host from the domainpart of the JID.
 // Default the port to 5222.
 func NewClient(host, user, passwd string, debug bool) (*Client, error) {
+
 	opts := Options{
 		Host:     host,
 		User:     user,
@@ -258,6 +259,7 @@ func NewClient(host, user, passwd string, debug bool) (*Client, error) {
 		Debug:    debug,
 		Session:  false,
 	}
+
 	return opts.NewClient()
 }
 
