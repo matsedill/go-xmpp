@@ -198,6 +198,9 @@ type Options struct {
 
 // NewClient establishes a new Client connection based on a set of Options.
 func (o Options) NewClient() (*Client, error) {
+	if o.Debug {
+		fmt.Println("Hello I am in newclient")
+	}
 	host := o.Host
 	c, err := connect(host, o.User, o.Password)
 	if err != nil {
