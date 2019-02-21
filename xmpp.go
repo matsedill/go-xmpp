@@ -203,15 +203,15 @@ func (o Options) NewClient() (*Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	if o.Debug {
-		fmt.Fprintf(os.Stdout, "Hello I am in newclient")
-	}
 
 	if strings.LastIndex(o.Host, ":") > 0 {
 		host = host[:strings.LastIndex(o.Host, ":")]
 	}
 
 	client := new(Client)
+	if o.Debug {
+		fmt.Fprintf(os.Stdout, "Hello I am in newclient, made client")
+	}
 	if o.NoTLS {
 		client.conn = c
 	} else {
